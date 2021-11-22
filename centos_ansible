@@ -6,7 +6,7 @@ visudo
 ansible ALL=(ALL)       NOPASSWD: ALL
 su - ansible
 
-
+## sudo amazon-linux-extras install epel -y  // amazon linuxos
 sudo yum install epel-release
 sudo  yum install ansible
 ansible --version
