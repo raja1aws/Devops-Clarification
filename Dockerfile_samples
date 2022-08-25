@@ -284,4 +284,13 @@ RUN chmod +x /start.sh
 
 CMD /start.sh
 -----------------------------------------------
-   
+   ## docker build -t maven:1 -f multistage.
+
+FROM maven:3.6-alpine as builder
+COPY demo /app
+WORKDIR /app
+RUN mvn install
+FROM tomcat:8
+COPY --from=builder /app/target/sweet.war  /usr/local/tomcat/webapps/
+
+##  docker run -d -p 7707:8080 <image_name> 
