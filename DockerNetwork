@@ -143,3 +143,103 @@ docker container run -d --name private-nginx -p 8081:80 --network localhost ngin
 #Inspect private-nginx:
 
 docker container inspect private-nginx
+------------------------------------
+docker logs -f <container_name>
+
+docker build -t demo:1 -f sample/Dockerfile4 --build-arg user=pandian --build-arg httpd_package=httpd saple-images/ 
+
+du -shc *
+
+vi .dockerignore
+
+**********************************************
+#FROM nginx:alpine
+
+#RUN echo "HIPPO" >> /usr/share/nginx/html/test.html
+
+#RUN echo "AZCS" >> /usr/share/nginx/html/test.html
+
+-------------------------------------------------
+System Information Commands
+uname -a				shows Linux system info
+uname -r				shows kernel release info
+cat /etc/redhat-release	shows installed redhat version
+uptime					displays system running/life time
+
+docker run -itd -v /mnt --name test centos
+docker rm -fv test
+docker run -itd -v /mnt --name test centos
+docker rm -f test
+docker volume ls
+docker volume ls -f=dangling=true
+docker volume rm $(docker volume ls -f=dangling=true)
+
+##mkdir mongo
+
+docker run -d --name mongo -v /mnt/mongo/:/data/db -p 27017:27017
+
+docker run -d --name jenkins -p 8800:8080 -v /mnt/jenkins:/var/jenkins_home jenkins/jenkins
+docker run -d --name jenkins -p 8900:8080 -v /mnt/jenkins:/var/jenkins_home jenkins/jenkins
+#docker logs -f <conter_id>
+## docker run --rm -it jenkins/jenkins bash
+
+##/mnt/jenkins
+##sudo chown 1000:1000 -R jenkins
+
+
+-----------------------------
+docker run --name apache -d -p 8080:80 httpd
+
+docker exec -it <continer_id> bash
+	cd htdocs-> cat index.html
+	
+in docker host machine create a file demo.html with [this file was copied from host to running container] 
+	
+docker cp demo.html <container_name>:/usr/local/apache2(cotainer_name)htdocs/index.html 
+
+#FROM nginx:alpine
+
+#RUN \
+#  echo "HIPPO" >> /usr/share/nginx/html/test.html && \
+
+#  echo "AZCS" >> /usr/share/nginx/html/test.html
+
+
+FROM nginx:alpine
+
+ENV webfile /usr/share/nginx/html/test.html
+
+RUN \
+  echo "HIPPO" >> $webfile && \
+  echo "AZCS" >> $webfile
+
+docker build -t demo:v1 -f Dockerfile1 .
+
+docker run -d -p 9090:80 demo:v1
+------------------------
+
+FROM centos:7
+
+RUN yum -y install httpd  php php-mysql
+
+COPY html-ssl /var/www/html
+
+RUN echo "<?php phpinfo(); ?>" >/var/www/html/info.php
+
+CMD apachectl -DFOREGROUND
+
+# docker build -t php:1 .
+# docker run -d -p 9090:880 --name demo_ssl php:1 
+----------------------------------
+
+https://docs.docker.com/compose/install/
+
+version: '3'
+services:
+  demo_web:
+    containername: nginx_sample
+	ports: "9700:80"
+	image: ngix:alpine
+	  
+volumes:
+networks:
