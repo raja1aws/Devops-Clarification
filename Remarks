@@ -42,6 +42,11 @@ https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
 *************JENKINS SLAVE***************
 
 sudo yum -y install git java-1.8.0-openjdk
+
+sudo amazon-linux-extras install java-openjdk11 -y  // aws linux os
+sudo alternatives --config java
+java -version
+
 sudo useradd -d /var/lib/jenkins jenkins
 ssh-keygen
 cat /home/centos/.ssh/id_rsa.pub
