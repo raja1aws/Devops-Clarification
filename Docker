@@ -38,6 +38,10 @@ docker images -f dangling=true -q
 docker rmi $(docker images -f dangling=true -q)
 docker inspect <container-id>
 
+docker  images -f=dangling=true
+
+docker rmi  $(docker images -f=dangling=true)
+
 sudo chmod 666 /var/run/docker.sock
 
 docker run -d -p 3306:3306 --name sample_mysql -e MYSQL_ROOT_PASSWORD=12345678 mysql:5.7
