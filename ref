@@ -1,5 +1,10 @@
 https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/
 
+sudo amazon-linux-extras install java-openjdk11
+
+alternatives --install /usr/bin/java java /opt/jdk*/bin/java 2
+alternatives --config java
+
 yum update
 sudo su -
 
