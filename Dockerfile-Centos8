@@ -13,13 +13,13 @@ LABEL Porduct=AC
 
 WORKDIR /var/www/html/
 
-ENV SAM tamanna
+ENV SAM chocolux
 
-ADD https://github.com/awspandian/$SAM/archive/refs/heads/demo.zip ./code.zip
+ADD  https://www.free-css.com/assets/files/free-css-templates/download/page293/$SAM.zip ./code.zip
 
-RUN unzip code.zip && mv $SAM-demo/* .
+RUN unzip code.zip && mv $SAM*/* .
 
-RUN rm -rf code.zip $SAM-demo/
+RUN rm -rf code.zip $SAM*
 
 RUN useradd $user && chown $user:$user /var/www/html -R
 
