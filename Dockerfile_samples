@@ -7,7 +7,13 @@ FROM centos
 
 RUN yum -y install httpd
 
-ADD https://github.com/awspandian/tamanna/archive/demo.zip /var/www/html/code.zip
+ADD ENV SAM chocolux
+
+ADD  https://www.free-css.com/assets/files/free-css-templates/download/page293/$SAM.zip /var/www/html/code.zip
+
+RUN unzip code.zip && mv $SAM*/* .
+
+RUN rm -rf code.zip $SAM* 
 
 CMD apachectl -DFOREGROUND
 
@@ -99,7 +105,7 @@ USER root
 
 CMD apachectl -DFOREGROUND
 --------------------------------------------------------
-FROM centos
+FROM centos:7
 
 ARG user=application
 
@@ -112,15 +118,15 @@ ENV HTML tamanna
 
 WORKDIR /var/www/html
 
-ADD  https://github.com/awspandian/$HTML/archive/demo.zip ./code.zip
+ENV SAM chocolux
 
-RUN unzip code.zip && mv $HTML-demo/* . && echo $HTML > ./env.html
+ADD  https://www.free-css.com/assets/files/free-css-templates/download/page293/$SAM.zip ./code.zip
 
-RUN useradd $user && chown $user:$user /var/www/html -R
+RUN unzip code.zip && mv $SAM*/* .
+
+RUN rm -rf code.zip $SAM*
 
 USER $user
-
-RUN rm -rf code.zip $HTML-demo/
 
 USER root
 
